@@ -1,4 +1,5 @@
 import streamlit as st
+from openAI import open_ai_request, init_prompt
 
 
 def main():
@@ -17,17 +18,17 @@ def main():
     # Display the Emotion
     st.image(emotions["Happy"], width=600)
     st.subheader("User Input:")
+
+    init_prompt()
+
     user_input = st.text_input("")
 
     st.subheader("Lis:")
-    '''
-    output = openAI(user_input)
-    
-    Emotion = segmentanalyse(output)
-    '''
 
+    output = open_ai_request(user_input)
 
-    st.text(user_input)
+    st.text(output)
+
 
 if __name__ == "__main__":
     main()
