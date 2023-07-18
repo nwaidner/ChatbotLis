@@ -20,9 +20,14 @@ def main():
     user_input = st.text_input("")
 
     st.subheader("Lis:")
+    '''
+    output = openAI(user_input)
+    
+    Emotion = segmentanalyse(output)
+    '''
+
 
     st.text(user_input)
-
 
 if __name__ == "__main__":
     main()
