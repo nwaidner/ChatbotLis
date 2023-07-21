@@ -27,7 +27,7 @@ def main():
 
     output = open_ai_request(user_input)
 
-    st.text(output)
+    st.write(output)
 
 
 if __name__ == "__main__":
