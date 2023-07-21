@@ -8,7 +8,6 @@ openai.api_key = keys.OPENAI_API_KEY
 def open_ai_request(content):
     chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo",
                                                    messages=[{"role": "user", "content": content}])
-
     return chat_completion.choices[0].message.content
 
 

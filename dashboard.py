@@ -15,24 +15,28 @@ def main():
         "Surprise": "./resources/emotion_pics/surprised.png"
     }
 
-    st.subheader("User Input:")
+    col1, col2 = st.columns(2)
 
-    # init_prompt()
+    with col1:
+        st.subheader("User Input:")
 
-    user_input = st.text_input("")
+        # init_prompt()
 
-    if user_input != "":
-        emotion = (emotion_detection_text2emotion(user_input))
-    else:
-        emotion = "Neutral"
+        user_input = st.text_input("")
 
-    st.image(emotions[emotion], width=600)
+        if user_input != "":
+            emotion = (emotion_detection_text2emotion(user_input))
+        else:
+            emotion = "Neutral"
+    with col2:
+        st.image(emotions[emotion], width=600)
 
-    st.subheader("Lis:")
+    with col1:
+        st.subheader("Lis:")
 
-    output = open_ai_request(user_input)
+        output = open_ai_request(user_input)
 
-    st.write(output)
+        st.write(output)
 
 
 if __name__ == "__main__":
