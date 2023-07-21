@@ -20,21 +20,16 @@ def main():
     with col1:
         st.subheader("User Input:")
 
-        # init_prompt()
-
         user_input = st.text_input("")
 
-        if user_input != "":
-            emotion = (emotion_detection_text2emotion(user_input))
-        else:
-            emotion = "Neutral"
     with col2:
+        output = open_ai_request(user_input)
+        emotion = (emotion_detection_text2emotion(output))
         st.image(emotions[emotion], width=600)
 
     with col1:
         st.subheader("Lis:")
 
-        output = open_ai_request(user_input)
 
         st.write(output)
 
