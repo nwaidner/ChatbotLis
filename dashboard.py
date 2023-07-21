@@ -11,20 +11,22 @@ def main():
         "Happy": "./resources/emotion_pics/happy.png",
         "Sad": "./resources/emotion_pics/sad.png",
         "Angry": "./resources/emotion_pics/angry.png",
-        "Disgusted": "./resources/emotion_pics/disgusted.png",
-        "Fearful": "./resources/emotion_pics/fearful.png",
-        "Surprised": "./resources/emotion_pics/surprised.png"
+        "Fear": "./resources/emotion_pics/fearful.png",
+        "Surprise": "./resources/emotion_pics/surprised.png"
     }
 
-    # Display the Emotion
-    st.image(emotions["Neutral"], width=600)
     st.subheader("User Input:")
 
     # init_prompt()
 
     user_input = st.text_input("")
 
-    st.header(emotion_detection_text2emotion(user_input))
+    if user_input != "":
+        emotion = (emotion_detection_text2emotion(user_input))
+    else:
+        emotion = "Neutral"
+
+    st.image(emotions[emotion], width=600)
 
     st.subheader("Lis:")
 
