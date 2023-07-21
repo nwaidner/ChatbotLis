@@ -1,5 +1,6 @@
 import streamlit as st
 from openAI import open_ai_request, init_prompt
+from emotion_analysis import emotion_detection_text2emotion
 
 
 def main():
@@ -16,12 +17,14 @@ def main():
     }
 
     # Display the Emotion
-    st.image(emotions["Happy"], width=600)
+    st.image(emotions["Neutral"], width=600)
     st.subheader("User Input:")
 
-    init_prompt()
+    # init_prompt()
 
     user_input = st.text_input("")
+
+    st.header(emotion_detection_text2emotion(user_input))
 
     st.subheader("Lis:")
 
