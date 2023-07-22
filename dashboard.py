@@ -18,18 +18,25 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
+        st.subheader("Diagnosis:")
+
+        diagnosis = st.text_input(placeholder="Please enter a diagnosis", value="", label="Textfield for Entering the Diagnosis")
+
         st.subheader("User Input:")
 
         user_input = st.text_input("")
 
     with col2:
-        output = open_ai_request(user_input)
-        emotion = (emotion_detection_text2emotion(output))
+        if diagnosis != "":
+            output = open_ai_request(content=user_input, diagnosis=diagnosis)
+            emotion = (emotion_detection_text2emotion(output))
+        else:
+            emotion = "Neutral"
+            output = "HI, I'm Lis"
         st.image(emotions[emotion], width=600)
 
     with col1:
         st.subheader("Lis:")
-
 
         st.write(output)
 
