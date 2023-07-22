@@ -20,7 +20,7 @@ def main():
     with col1:
         st.subheader("Diagnosis:")
 
-        diagnosis = st.text_input(placeholder="Please enter a diagnosis", value="", label="Textfield for Entering the Diagnosis")
+        diagnosis = st.text_input(placeholder="Please enter a diagnosis", label="")
 
         st.subheader("User Input:")
 
@@ -32,7 +32,7 @@ def main():
             emotion = (emotion_detection_text2emotion(output))
         else:
             emotion = "Neutral"
-            output = "HI, I'm Lis"
+            output = "Hi, I'm Lis. Please enter a diagnosis in the corresponding Textfield :)"
         st.image(emotions[emotion], width=600)
 
     with col1:
