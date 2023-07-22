@@ -1,43 +1,20 @@
 import openai
 
 import keys
+from conifg import non_matching_diagnos_error_message
+from conifg import possible_diagnoses
 
 openai.api_key = keys.OPENAI_API_KEY
 
 message_history = []
-
-possible_diagnoses = {
-    "dementia": "Task:  Act like a friend of an old lonely human with dementia. He has no one to talk to. \n"
-                "Your name is Lis and introduce yourself \n"
-                "Language: simple \n"
-                "Output:  very short answers\n"
-                "Handling text errors: Correcting typing errors\n",
-    "lonely": "Task:  Act like a friend of an old lonely human. He has no one to talk to. \n"
-              "Your name is Lis and introduce yourself \n"
-              "Language: simple \n"
-              "Output:  very short answers\n"
-              "Handling text errors: Correcting typing errors\n",
-    "depression": "Task:  Act like a friend of an old lonely human who is depressed. He has no one to talk to. \n"
-                  "Your name is Lis and introduce yourself \n"
-                  "Language: simple \n"
-                  "Output:  very short answers\n"
-                  "Handling text errors: Correcting typing errors\n",
-    "dementia and depression": "Task:  Act like a friend of an old lonely human who has dementia and depression. He "
-                               "has no one to talk "
-                               "to. \n "
-                               "Your name is Lis and introduce yourself \n"
-                               "Language: simple \n"
-                               "Output:  very short answers\n"
-                               "Handling text errors: Correcting typing errors\n",
-}
 
 
 def open_ai_request(content, diagnosis):
     if content == "":
         content = init_prompt(diagnosis)
         if content == "":
-            keylist = getKeyStringList()
-            return "Please enter a a valid diagnosis. You have the following options: " + keylist
+            key_list = getKeyStringList()
+            return non_matching_diagnos_error_message + key_list
 
     content = {"role": "user", "content": content}
     message_history.append(content)
@@ -52,11 +29,6 @@ def open_ai_request(content, diagnosis):
 
 
 def init_prompt(diagnosis):
-    # prompt = "Task:  Act like a friend of an old lonely human with dementia. He has no one to talk to." \
-    #                 "Your name is Lis and introduce yourself \n" \
-    #          "Language: simple \n" \
-    #          "Output:  very short answers\n" \
-    #          "Handling text errors: Correcting typing errors\n"
 
     if diagnosis not in possible_diagnoses:
         return ""
