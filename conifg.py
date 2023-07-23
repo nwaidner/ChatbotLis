@@ -1,4 +1,3 @@
-
 # Emotions that can be shown
 emotions = {
     "Neutral": "./resources/emotion_pics/neutral.png",

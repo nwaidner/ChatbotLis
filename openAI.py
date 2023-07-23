@@ -1,15 +1,35 @@
 import openai
-
+import data_handler as dh
 import keys
 from conifg import non_matching_diagnos_error_message
 from conifg import possible_diagnoses
 
 openai.api_key = keys.OPENAI_API_KEY
 
-message_history = []
 
+def open_ai_request(content):
+    current_user_uuid = dh.read_selected_user()
+    current_user = dh.get(current_user_uuid)
 
-def open_ai_request(content, diagnosis):
+    if content == "":
+        content = init_prompt(current_user.diagnosis)
+
+    content = {"role": "user", "content": content}
+
+    dh.append_chat_history(current_user_uuid, content)
+
+    current_user = dh.get(current_user_uuid)
+
+    chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=current_user.chat_history)
+    content_output = chat_completion.choices[0].message.content
+
+    output_for_history = {"role": "system", "content": content_output}
+    dh.append_chat_history(current_user_uuid, output_for_history)
+
+    return content_output
+
+'''
+def open_ai_request(content):
     if content == "":
         content = init_prompt(diagnosis)
         if content == "":
@@ -27,6 +47,7 @@ def open_ai_request(content, diagnosis):
 
     return content_output
 
+'''
 
 def init_prompt(diagnosis):
 

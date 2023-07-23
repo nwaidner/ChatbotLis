@@ -12,17 +12,13 @@ def main():
     col1, col2 = st.columns(2)
 
     with col1:
-        st.subheader("Diagnosis:")
-
-        diagnosis = st.text_input(placeholder="Please enter a diagnosis", label="")
-
         st.subheader("User Input:")
 
         user_input = st.text_input("")
 
     with col2:
-        if diagnosis != "":
-            output = open_ai_request(content=user_input, diagnosis=diagnosis)
+        if user_input != "":
+            output = open_ai_request(content=user_input)
             emotion = (emotion_detection_text2emotion(output))
         else:
             emotion = default_emotion
