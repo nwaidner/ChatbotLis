@@ -19,7 +19,9 @@ def open_ai_request(content):
 
     current_user_uuid = dh.read_selected_user()
 
-    chat_completion = openai.ChatCompletion.create(model="gpt-3.5-turbo", messages=dh.get_chat_history(current_user_uuid))
+    chat_completion = openai.ChatCompletion.create(
+        model="gpt-3.5-turbo", messages=dh.get_chat_history(current_user_uuid)
+    )
     content_output = chat_completion.choices[0].message.content
 
     output_for_history = {"role": "system", "content": content_output}

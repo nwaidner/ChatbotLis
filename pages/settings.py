@@ -1,9 +1,8 @@
 import streamlit as st
-
 import data_handler as dh
 from config import possible_diagnoses
-from config import non_matching_diagnos_error_message
-from config import getKeyStringList
+from config import DIAGNOSIS_NOT_MATCHING_ERROR
+from config import get_key_string_list
 
 # CURRENT USER
 
@@ -43,7 +42,7 @@ if st.button("Confirm Diagnosis Change"):
     if new_diagnosis in possible_diagnoses:
         dh.modify_diagnosis(selected_user.uuid, new_diagnosis)
     else:
-        st.write(non_matching_diagnos_error_message + getKeyStringList())
+        st.write(DIAGNOSIS_NOT_MATCHING_ERROR + get_key_string_list())
 
 
 # CREATE NEW USER #######################################
@@ -52,7 +51,7 @@ st.subheader("Create New User")
 _name = st.text_input("Name")
 _diagnosis = st.text_input("Diagnosis")
 if st.button("Confirm Creation"):
-    if _name is not "" and _name is not None and _diagnosis is not "" and _diagnosis is not None:
+    if _name != "" and _name is not None and _diagnosis != "" and _diagnosis is not None:
         if _diagnosis in possible_diagnoses:
             new_user = dh.User(
                 name=_name,
@@ -61,7 +60,7 @@ if st.button("Confirm Creation"):
 
             dh.put(new_user)
         else:
-            st.write(non_matching_diagnos_error_message + getKeyStringList())
+            st.write(DIAGNOSIS_NOT_MATCHING_ERROR + get_key_string_list())
     else:
         st.write("please provide correct details for the new User")
 
