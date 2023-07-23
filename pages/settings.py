@@ -14,6 +14,8 @@ st.subheader("Change Current User")
 
 st.write(f"Current User: {current_user.name}")
 
+
+
 # SELECT EXISTING USERS ##################################
 all_users = dh.get_all_users()
 
@@ -57,7 +59,7 @@ if st.button("Confirm Creation"):
                 diagnosis=_diagnosis,
             )
 
-            dh.put(new_user.uuid, new_user)
+            dh.put(new_user)
         else:
             st.write(non_matching_diagnos_error_message + getKeyStringList())
     else:

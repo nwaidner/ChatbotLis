@@ -25,10 +25,14 @@ def get(uuid):
         return db.get(str(uuid))
 
 
-def put(uuid, user_obj):
+def put(user_obj):
     user_obj.last_changed = time.time()
     with shelve.open(database) as db:
-        db[str(uuid)] = user_obj
+        db[str(user_obj.uuid)] = user_obj
+
+def check(uuid):
+    with shelve.open(database) as db:
+        return str(uuid) in db
 
 
 def delete(uuid):

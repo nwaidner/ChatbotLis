@@ -1,7 +1,6 @@
 import openai
 import data_handler as dh
 import keys
-from config import non_matching_diagnos_error_message
 from config import possible_diagnoses
 
 openai.api_key = keys.OPENAI_API_KEY
