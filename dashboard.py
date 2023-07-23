@@ -1,9 +1,8 @@
 import streamlit as st
-from openAI import open_ai_request, init_prompt
-from emotion_analysis import emotion_detection_text2emotion
+
 from config import emotions
-from config import default_emotion
-from config import default_output
+from emotion_analysis import emotion_detection_text2emotion
+from openAI import open_ai_request
 
 
 def main():
@@ -15,17 +14,11 @@ def main():
         st.subheader("User Input:")
 
         user_input = st.text_input(label="")
-        # print(user_input)
-        # st.write("User:")
-        # st.write(user_input)
 
     with col2:
-        # if user_input != "":
         output = open_ai_request(content=user_input)
         emotion = (emotion_detection_text2emotion(output))
-        # else:
-        #     emotion = default_emotion
-        #     output = default_output
+
         st.image(emotions[emotion], width=600)
 
     with col1:

@@ -1,6 +1,5 @@
 import streamlit as st
 
-import config
 import data_handler as dh
 from config import possible_diagnoses
 from config import non_matching_diagnos_error_message
