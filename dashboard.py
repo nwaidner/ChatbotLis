@@ -3,6 +3,7 @@ import data_handler as dh
 from config import emotions
 from emotion_analysis import emotion_detection_text2emotion
 from open_ai import open_ai_request
+from tts import play_audio
 
 
 def main():
@@ -24,14 +25,17 @@ def main():
 
     with col2:
         output = open_ai_request(content=user_input)
-        emotion = (emotion_detection_text2emotion(output))
+        emotion = emotion_detection_text2emotion(output)
 
         st.image(emotions[emotion], width=600)
+        play_audio_option = st.checkbox("Play Audio")
 
     with col1:
         st.subheader("Lis:")
 
         st.write(output)
+        if play_audio_option:
+            play_audio(output)
 
 
 if __name__ == "__main__":
