@@ -1,8 +1,8 @@
 import openai
 import data_handler as dh
 import keys
-from conifg import non_matching_diagnos_error_message
-from conifg import possible_diagnoses
+from config import non_matching_diagnos_error_message
+from config import possible_diagnoses
 
 openai.api_key = keys.OPENAI_API_KEY
 
@@ -65,12 +65,3 @@ def init_prompt(diagnosis):
     print("matching diagnosis for '" + diagnosis + "' found")
 
     return prompt
-
-
-def getKeyStringList():
-    keylist = ""
-
-    for dia in possible_diagnoses:
-        keylist += dia + ", "
-
-    return keylist

@@ -73,9 +73,7 @@ def append_chat_history(uuid, new_chat_history):
         user = db.get(str(uuid))
         if user:
             string_message = repr(new_chat_history)
-            print("string_message:" + string_message)
             user.chat_history += string_message  # Update the chat history
-            print("user_chat_history:" + user.chat_history)
             user.last_changed = time.time()
             db[str(uuid)] = user
         else:
@@ -87,7 +85,6 @@ def get_chat_history(uuid):
         user = db.get(str(uuid))
         if user:
             message_history = custom_eval(user.chat_history)
-            print("message_history:" + str(message_history))
 
     return message_history
 

@@ -43,3 +43,11 @@ possible_diagnoses = {
 # Output that is shown, when a diagnosis is not supported
 non_matching_diagnos_error_message = "Please enter a a valid diagnosis. You have the following options: "
 
+
+def getKeyStringList():
+    keylist = ""
+
+    for dia in possible_diagnoses:
+        keylist += dia + ", "
+
+    return keylist
