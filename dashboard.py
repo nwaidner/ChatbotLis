@@ -14,15 +14,16 @@ def main():
     with col1:
         st.subheader("User Input:")
 
-        user_input = st.text_input("")
+        user_input = st.text_input(label="")
+        st.write("User:" + user_input)
 
     with col2:
-        if user_input != "":
-            output = open_ai_request(content=user_input)
-            emotion = (emotion_detection_text2emotion(output))
-        else:
-            emotion = default_emotion
-            output = default_output
+        # if user_input != "":
+        output = open_ai_request(content=user_input)
+        emotion = (emotion_detection_text2emotion(output))
+        # else:
+        #     emotion = default_emotion
+        #     output = default_output
         st.image(emotions[emotion], width=600)
 
     with col1:

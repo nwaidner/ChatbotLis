@@ -1,5 +1,6 @@
 import streamlit as st
 import data_handler as dh
+from conifg import possible_diagnoses
 
 
 
@@ -7,7 +8,6 @@ import data_handler as dh
 
 current_user_uuid = dh.read_selected_user()
 current_user = dh.get(current_user_uuid)
-
 st.header("Change Current User")
 
 st.write(f"Current User: {current_user.name}")

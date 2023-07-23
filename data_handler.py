@@ -13,6 +13,7 @@ def get_all_uuids():
 
     return all_uuids
 
+
 def get_all_users():
     with shelve.open(database) as db:
         all_users = [db[str(uuid)] for uuid in get_all_uuids()]
@@ -71,11 +72,39 @@ def append_chat_history(uuid, new_chat_history):
     with shelve.open("users") as db:
         user = db.get(str(uuid))
         if user:
-            user.chat_history = user.chat_history + new_chat_history  # Update the chat history
+            string_message = repr(new_chat_history)
+            print("string_message:" + string_message)
+            user.chat_history += string_message  # Update the chat history
+            print("user_chat_history:" + user.chat_history)
             user.last_changed = time.time()
             db[str(uuid)] = user
         else:
             raise ValueError("User not found with the given UUID.")
+
+
+def get_chat_history(uuid):
+    with shelve.open("users") as db:
+        user = db.get(str(uuid))
+        if user:
+            message_history = custom_eval(user.chat_history)
+            print("message_history:" + str(message_history))
+
+    return message_history
+
+
+def add_comma_between_brackets(input_string):
+    result = ""
+    for i in range(len(input_string)):
+        result += input_string[i]
+        if input_string[i] == '}' and i < len(input_string) - 1 and input_string[i + 1] == '{':
+            result += ','
+    return result
+
+
+def custom_eval(message_history):
+    message_history = f"[{message_history}]"
+    message_history = add_comma_between_brackets(message_history)
+    return eval(message_history)
 
 
 class User:
@@ -100,10 +129,3 @@ def write_selected_user(selected_user_uuid):
         data["selected_user"] = str(selected_user_uuid)
     with open(filename, 'w') as file:
         json.dump(data, file)
-
-
-
-
-
-
-
