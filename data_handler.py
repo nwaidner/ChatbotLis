@@ -4,6 +4,8 @@ import uuid
 import json
 from config import DATABASE_PATH
 from config import SELECTED_USER_PATH
+from config import BOOLEAN_VALUE_PATH
+from config import possible_diagnoses
 
 
 def get_all_uuids():
@@ -28,6 +30,7 @@ def put(user_obj):
     user_obj.last_changed = time.time()
     with shelve.open(DATABASE_PATH) as data_base:
         data_base[str(user_obj.uuid)] = user_obj
+
 
 def check(uuid):
     with shelve.open(DATABASE_PATH) as data_base:
@@ -113,7 +116,7 @@ class User:
         self.uuid = uuid.uuid4()
         self.diagnosis = diagnosis
         self.last_changed = time.time()
-        self.chat_history = ""
+        self.chat_history = {"role": "user", "content": possible_diagnoses[diagnosis]}
 
 
 def read_selected_user():
@@ -129,3 +132,17 @@ def write_selected_user(selected_user_uuid):
         data[SELECTED_USER_PATH] = str(selected_user_uuid)
     with open(SELECTED_USER_PATH, 'w') as file:
         json.dump(data, file)
+
+
+def read_boolean_value():
+    with open(BOOLEAN_VALUE_PATH, 'r') as file:
+        data = json.load(file)
+        # Assuming the JSON file contains a boolean value directly
+        return data
+
+
+def write_boolean_value(boolean_value):
+    data = boolean_value
+    with open(BOOLEAN_VALUE_PATH, 'w') as file:
+        json.dump(data, file)
+

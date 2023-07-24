@@ -1,6 +1,7 @@
 # Database
 DATABASE_PATH = "users"
 SELECTED_USER_PATH = "resources/selected.json"
+BOOLEAN_VALUE_PATH = "resources/audio_output.json"
 AUDIO_PATH = "resources/tts_audiofile.mp3"
 
 # Emotions that can be shown

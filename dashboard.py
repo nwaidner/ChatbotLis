@@ -28,13 +28,12 @@ def main():
         emotion = emotion_detection_text2emotion(output)
 
         st.image(emotions[emotion], width=600)
-        play_audio_option = st.checkbox("Play Audio")
 
     with col1:
         st.subheader("Lis:")
 
         st.write(output)
-        if play_audio_option:
+        if dh.read_boolean_value():
             play_audio(output)
 
 

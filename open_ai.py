@@ -10,12 +10,13 @@ def open_ai_request(content):
     current_user_uuid = dh.read_selected_user()
     current_user = dh.get(current_user_uuid)
 
-    if content == "":
-        content = init_prompt(current_user.diagnosis)
+    # if content == "":
+    #     content = init_prompt(current_user.diagnosis)
+    #     print("content empty")
 
-    content = {"role": "user", "content": content}
-
-    dh.append_chat_history(current_user_uuid, content)
+    if content != "":
+        content = {"role": "user", "content": content}
+        dh.append_chat_history(current_user_uuid, content)
 
     current_user_uuid = dh.read_selected_user()
 
