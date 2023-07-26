@@ -5,7 +5,7 @@ import json
 from config import DATABASE_PATH
 from config import SELECTED_USER_PATH
 from config import BOOLEAN_VALUE_PATH
-from config import possible_diagnoses
+from config import POSSIBLE_DIAGNOSIS
 
 
 def get_all_uuids():
@@ -116,7 +116,7 @@ class User:
         self.uuid = uuid.uuid4()
         self.diagnosis = diagnosis
         self.last_changed = time.time()
-        self.chat_history = {"role": "user", "content": possible_diagnoses[diagnosis]}
+        self.chat_history = repr({"role": "user", "content": POSSIBLE_DIAGNOSIS[diagnosis]})
 
 
 def read_selected_user():

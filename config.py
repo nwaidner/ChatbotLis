@@ -21,7 +21,7 @@ DEFAULT_EMOTION = "Neutral"
 DEFAULT_OUTPUT = "Hi, I'm Lis. Please enter a diagnosis in the corresponding Textfield :)"
 
 # supported diagnoses types
-possible_diagnoses = {
+POSSIBLE_DIAGNOSIS = {
     "dementia": "Task:  Act like a friend of an old lonely human with dementia. "
                 "He has no one to talk to. \n"
                 "Your name is Lis and introduce yourself \n"
@@ -56,7 +56,7 @@ DIAGNOSIS_NOT_MATCHING_ERROR = "Please enter a a valid diagnosis. You have the f
 def get_key_string_list():
     keys = ""
 
-    for dia in possible_diagnoses:
+    for dia in POSSIBLE_DIAGNOSIS:
         keys += dia + ", "
 
     return keys

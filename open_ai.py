@@ -1,7 +1,7 @@
 import openai
 import data_handler as dh
 import keys
-from config import possible_diagnoses
+from config import POSSIBLE_DIAGNOSIS
 
 openai.api_key = keys.OPENAI_API_KEY
 
@@ -32,8 +32,8 @@ def open_ai_request(content):
 
 
 def init_prompt(diagnosis):
-    if diagnosis not in possible_diagnoses:
+    if diagnosis not in POSSIBLE_DIAGNOSIS:
         return ""
-    prompt = possible_diagnoses[diagnosis]
+    prompt = POSSIBLE_DIAGNOSIS[diagnosis]
 
     return prompt

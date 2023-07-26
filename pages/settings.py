@@ -1,6 +1,6 @@
 import streamlit as st
 import data_handler as dh
-from config import possible_diagnoses
+from config import POSSIBLE_DIAGNOSIS
 from config import DIAGNOSIS_NOT_MATCHING_ERROR
 from config import get_key_string_list
 from datetime import datetime
@@ -13,7 +13,6 @@ st.header("Settings")
 
 # Change Audio Settings ##################################
 st.subheader("Audio Settings")
-
 
 if dh.read_boolean_value():
     audio_setting = "activated"
@@ -61,9 +60,9 @@ st.subheader("Modify Diagnosis")
 new_diagnosis = st.text_input("New Diagnosis")
 if st.button("Confirm Diagnosis Change"):
     user_uuid = selected_user.uuid
-    if new_diagnosis in possible_diagnoses:
+    if new_diagnosis in POSSIBLE_DIAGNOSIS:
         dh.modify_diagnosis(user_uuid, new_diagnosis)
-        init_prompt = {"role": "user", "content": possible_diagnoses[new_diagnosis]}
+        init_prompt = {"role": "user", "content": POSSIBLE_DIAGNOSIS[new_diagnosis]}
         dh.append_chat_history(user_uuid, init_prompt)
     else:
         st.write(DIAGNOSIS_NOT_MATCHING_ERROR + get_key_string_list())
@@ -75,7 +74,7 @@ _name = st.text_input("Name")
 _diagnosis = st.text_input("Diagnosis")
 if st.button("Confirm Creation"):
     if _name != "" and _name is not None and _diagnosis != "" and _diagnosis is not None:
-        if _diagnosis in possible_diagnoses:
+        if _diagnosis in POSSIBLE_DIAGNOSIS:
             new_user = dh.User(
                 name=_name,
                 diagnosis=_diagnosis,
@@ -92,7 +91,7 @@ st.subheader("Deletion & Reset")
 
 if st.button("Reset Chat History"):
     dh.reset_chat_history(selected_user.uuid)
-    diagnosis_prompt = possible_diagnoses[selected_user.diagnosis]
+    diagnosis_prompt = POSSIBLE_DIAGNOSIS[selected_user.diagnosis]
     init_prompt = {"role": "user", "content": diagnosis_prompt}
     dh.append_chat_history(selected_user.uuid, init_prompt)
 
